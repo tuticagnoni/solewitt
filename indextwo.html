@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sol leWitt</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+    
+</head>
+<body>
+    <script>
+        //cuanto mide el width y height de la pantalla
+        const width = window.innerWidth
+        const height = window.innerHeight
+
+        //creando el elemento <svg>
+        //https://developer.mozilla.org/es/docs/Web/API/Document/createElementNS
+        const svg = document.createElementNS('http://www.w3.org/2000/svg',
+        'svg') //creo un elemento
+        svg.setAttribute("width", width) //le doy atributos
+        svg.setAttribute("height", height)
+        document.body.appendChild(svg) //lo agrego al documento (en este caso en el body)
+
+        //creando la mascara para cortar las rayas del fondo
+        const mask = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'mask'
+        )
+        mask.setAttribute('id', 'circle.mask')
+        svg.appendChild(mask)
+
+         //creando el fondo de la mascara
+         const maskRect = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'rect'
+        )
+        maskRect.setAttribute('width', width)
+        maskRect.setAttribute('height', height)
+        maskRect.setAttribute('fill', 'black')
+        mask.appendChild(maskRect)
+        
+        //creando el circulo de la mascara
+        const circle = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'circle'
+        )
+        circle.setAttribute('cx', width /2)
+        circle.setAttribute('cy', height /2)
+        circle.setAttribute('r', 200)
+        circle.setAttribute('fill', 'white')
+        mask.appendChild(circle)
+
+        //creando la mascara para cortar las rayas del fondo
+        const mask2 = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'mask'
+        )
+        mask2.setAttribute('id', 'circle.mask-2')
+        svg.appendChild(mask2)
+
+         //creando el fondo de la mascara
+         const maskRect2 = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'rect'
+        )
+        maskRect2.setAttribute('width', width)
+        maskRect2.setAttribute('height', height)
+        maskRect2.setAttribute('fill', 'white')
+        mask2.appendChild(maskRect2)
+        
+        //creando el circulo de la mascara
+        const circle2 = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'circle'
+        )
+        circle2.setAttribute('cx', width /2)
+        circle2.setAttribute('cy', height /2)
+        circle2.setAttribute('r', 200)
+        circle2.setAttribute('fill', 'black')
+        mask2.appendChild(circle2)
+
+        
+        //creando las rayas 
+        const n = 100
+        for(let i = 0; i < n; i++){
+            const rect = document.createElementNS('http://www.w3.org/2000/svg',
+        'rect')
+            //horizontal lines
+            rect.setAttribute("y", i * 20)
+            rect.setAttribute("width", width)
+            rect.setAttribute("height", 10)
+
+            rect.setAttribute("mask", "url(#circle.mask)")
+            svg.appendChild(rect) //(en este caso dentro de <svg>)
+        }
+
+        for(let i = 0; i < n; i++){
+            const rect = document.createElementNS('http://www.w3.org/2000/svg',
+        'rect')
+            //vertical lines
+            rect.setAttribute("x", i * 20)
+            rect.setAttribute("width", 10)
+            rect.setAttribute("height", height)
+
+            rect.setAttribute("mask", "url(#circle.mask-2)")
+            svg.appendChild(rect) //(en este caso dentro de <svg>)
+        }
+
+
+       
+        
+
+
+
+
+        //javascript repaso
+        // console.log('hello trolo')
+
+        // const num = 5;
+        // num = 10; //error
+        // console.log(num)
+
+        // let  num = 5;
+        // num = 10; //reasignando el valor de una variable
+        // console.log(num)
+
+        // const object = {
+        //     num: 5
+        // };
+        // object.num = 10; //mutating the object
+        // console.log(objetc.num);
+
+        // for(let i = 0; i < 5; i++){
+        //     console.log(i)
+        // };
+
+        // const add = (a, b) => {
+        //    return a + b }
+        // console.log(add(5, 10))
+        
+        
+    </script>
+</body>
+</html>
