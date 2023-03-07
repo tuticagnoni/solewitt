@@ -15,7 +15,8 @@
     //referring to the object and invoque the object
     //horizontal rectangles
 svg
-    .selectAll('rect.horizontal')
+    .append('g')
+    .selectAll('rect')
     .data(range(n))
     .join('rect')
         .attr('y', (d) => d * 20) //d toma el lugar de i 
@@ -26,7 +27,8 @@ svg
 
         //vertical rectangles
 svg
-    .selectAll('rect.vertical')
+    .append('g')
+    .selectAll('rect')
     .data(range(n))
     .join('rect')
         .attr('x', (d) => d * 20) //d toma el lugar de i 
@@ -50,15 +52,20 @@ const renderMask = (selection, id, inverted) => {
         //     .append('g') 
         //     .attr('transform', `translate(${width / 2} , ${height / 2})`)
             
-        mask.selectAll('g')
-            .data(range(symbols.length))
-            .join((enter) => 
-                enter
-                    .append('g')
-                    .append('path')
-                    .attr('d', (d) => symbol(symbols[d], 100000)())
-                    .attr('fill', inverted ? 'white' : 'black')
-            )
+        mask
+        .selectAll('g')
+        .data(range(symbols.length))
+        .join((enter) => 
+            enter
+                .append('g')
+                .attr(
+                    'transform', 
+                    d => `translate(${d * 150 + 150} , ${height / 2})`
+                )
+                .append('path')
+                .attr('d', (d) => symbol(symbols[d], 8000)()) //d refiere a data (linea 57)
+                .attr('fill', inverted ? 'white' : 'black')
+        )
             // .append('path')
             // .attr('d', symbol(symbols[1], 100000)())
             // .attr('fill', inverted ? 'white' : 'black')
